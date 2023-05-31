@@ -1,0 +1,4 @@
+# Arquivos e pastas específicos do Next.js
+/.next
+/node_modules
+.env

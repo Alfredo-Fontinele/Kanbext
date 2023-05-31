@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+    back-end:
+        container_name: back-end-php
+        build:
+            context: ./back-end
+            dockerfile: ./back-end/Dockerfile
+        ports:
+            - "8080:80"
+        volumes:
+            - ./src:/var/www/laravel_docker
+            - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+        depends_on:
+            - database
+
+    frontend:
+        container_name: front-end-nextjs
+        build:
+            context: ./front-end
+            dockerfile: ./front-end/Dockerfile
+            target: runner
+        volumes:
+            - .:/app
+        command: npm run dev
+        ports:
+            - "3000:3000"
+        environment:
+            NODE_ENV: development
+        networks:
+            - my-network
+
+networks:
+    my-network:

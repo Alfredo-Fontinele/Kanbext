@@ -1,0 +1,9 @@
+# Arquivos e pastas específicos do Laravel
+/vendor
+/node_modules
+.env
+
+# Outros arquivos e pastas
+.git
+.dockerignore
+docker-compose.yml
