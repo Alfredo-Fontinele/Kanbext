@@ -1,66 +1,83 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Pré-requisitos 📋
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Antes de prosseguir com a configuração, verifique se você tem os seguintes itens instalados em seu notebook:
 
-## About Laravel
+-   ⚙️ **PHP**: Versão 7.4 ou superior
+-   🎵 **Composer**: O gerenciador de pacotes para PHP
+-   🌐 **Servidor Web**: Por exemplo, Apache ou Nginx
+-   💾 **Banco de Dados**: Por exemplo, MySQL ou PostgreSQL
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Passo 1: Instalando o XAMPP 💻
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+O XAMPP é um pacote de software livre que contém os componentes necessários para criar um ambiente de desenvolvimento local com Apache, MySQL, PHP e muito mais. Este guia fornecerá instruções passo a passo sobre como instalar o XAMPP em seu sistema.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Passo 2: Baixar o XAMPP 📦
 
-## Learning Laravel
+Faça o download da versão mais recente do XAMPP no site oficial: [https://www.apachefriends.org/index.html](https://www.apachefriends.org/index.html) conforme seu sistema operacional
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Passo 3: Executar o instalador 🗄️
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. Execute o arquivo de instalação do XAMPP que você baixou.
+2. Siga as instruções do instalador para selecionar os componentes que deseja instalar e o diretório de instalação.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Passo 4: Iniciar o XAMPP 💽
 
-## Laravel Sponsors
+Após a conclusão da instalação, siga as etapas abaixo para iniciar o XAMPP:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+1. No Windows, clique duas vezes no atalho do XAMPP no menu Iniciar.
+2. No macOS, abra o XAMPP a partir do Launchpad ou do diretório de aplicativos.
 
-### Premium Partners
+## Passo 5: Configurar o XAMPP 🌍
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+1. Na interface de controle do XAMPP, você pode iniciar e parar os serviços do Apache e MySQL clicando nos botões "Start" e "Stop".
+2. Para acessar o phpMyAdmin e gerenciar seus bancos de dados, clique no botão "Admin" próximo ao módulo MySQL.
 
-## Contributing
+## Passo 6: Testar a instalação 🗄️
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Abra seu navegador web e acesse [http://localhost](http://localhost) para verificar se o XAMPP foi instalado corretamente. Você deve ver a página padrão do XAMPP.
 
-## Code of Conduct
+Parabéns! Agora você tem o XAMPP instalado em seu sistema e está pronto para desenvolver e executar aplicativos PHP no ambiente local.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Passo 7: Instalar o Composer 🎼
 
-## Security Vulnerabilities
+1. Faça o download do Composer em https://getcomposer.org/download/.
+2. Siga as instruções de instalação para o seu sistema operacional.
+3. Verifique a instalação executando o comando `composer --version` no terminal. Deverá exibir a versão instalada do Composer.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Passo 8: Instalando as dependências 📦
 
-## License
+```php
+    composer install
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Passo 9: Crie o arquivo .env baseando-se no arquivo .env.example 🌐
+
+<br/>
+
+## Passo 10: Crie um banco de dados e informe o nome dele no arquivo .env na variável DB_DATABASE 🗄️
+
+<br/>
+
+## Passo 11: Crie a chave jwt 🔑
+
+```php
+    php artisan jwt:secret
+```
+
+## Passo 12: Rode o servidor e em seguida rode as migrations com o seguinte comando 🐘
+
+```php
+    php artisan migrate
+```
+
+## Passo 13: Criando usuario admin 👤
+
+```php
+    php artisan db:seed --class=UserSeeder
+```
+
+## Passo 14: Rode a aplicação na porta 5000 🚀
+
+```php
+    php artisan serve --port=5000
+```

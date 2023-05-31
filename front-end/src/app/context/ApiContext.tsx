@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import Cookies from 'universal-cookie'
 import { api } from '../services/api'
 
-export interface IItemTodoResponse {
+export interface ItemTodoResponseProps {
   id: string
   titulo: string
   conteudo: string
@@ -16,50 +16,50 @@ export interface IItemTodoResponse {
   updated_at: string
 }
 
-interface ITokenResponse {
+interface TokenResponseProps {
   access_token: string
   exception?: undefined
 }
 
-interface IItemTodoRequest {
+interface ItemTodoRequestProps {
   titulo: string
   conteudo: string
   lista: string
 }
 
-interface ILoginRequest {
+interface LoginRequestProps {
   login: string
   senha: string
 }
 
-interface IFindAllResponse {
-  items: IItemTodoResponse[]
+interface FindAllResponseProps {
+  items: ItemTodoResponseProps[]
   idType: string
   lista: 'To Do' | 'Doing' | 'Done'
 }
 
-export interface IColumnTodo {
+export interface ColumnTodoProps {
   idType: string
   lista: 'To Do' | 'Doing' | 'Done'
-  items: IItemTodoResponse[]
+  items: ItemTodoResponseProps[]
 }
 
 interface ApiContextProps {
-  todos: IColumnTodo[]
-  setTodos: React.Dispatch<React.SetStateAction<IColumnTodo[]>>
+  todos: ColumnTodoProps[]
+  setTodos: React.Dispatch<React.SetStateAction<ColumnTodoProps[]>>
   token: string
   setToken: React.Dispatch<React.SetStateAction<string>>
-  login: (loginRequest: ILoginRequest) => Promise<ITokenResponse | null>
-  findAll: () => Promise<IFindAllResponse[]>
-  createTodo: (item: IItemTodoRequest) => Promise<IItemTodoResponse>
+  login: (loginRequest: LoginRequestProps) => Promise<TokenResponseProps | null>
+  findAll: () => Promise<FindAllResponseProps[]>
+  createTodo: (item: ItemTodoRequestProps) => Promise<ItemTodoResponseProps>
   updateTodo: (
-    updatedTodo: IItemTodoResponse,
+    updatedTodo: ItemTodoResponseProps,
     destination: string,
   ) => Promise<void>
-  deleteTodo: (todoToDelete: IItemTodoResponse) => Promise<void>
-  selectedItem: IItemTodoResponse | null
+  deleteTodo: (todoToDelete: ItemTodoResponseProps) => Promise<void>
+  selectedItem: ItemTodoResponseProps | null
   setSelectedItem: React.Dispatch<
-    React.SetStateAction<IItemTodoResponse | null>
+    React.SetStateAction<ItemTodoResponseProps | null>
   >
 
   handleOnDragEnd: (result: DropResult) => void
@@ -76,10 +76,9 @@ const ApiContext = createContext<ApiContextProps>({} as ApiContextProps)
 
 export default function ApiProvider({ children }: React.PropsWithChildren) {
   const [destination, setDestination] = useState<DraggableLocation>()
-  const [selectedItem, setSelectedItem] = useState<IItemTodoResponse | null>(
-    null,
-  )
-  const [todos, setTodos] = useState<IColumnTodo[]>([
+  const [selectedItem, setSelectedItem] =
+    useState<ItemTodoResponseProps | null>(null)
+  const [todos, setTodos] = useState<ColumnTodoProps[]>([
     {
       idType: 'To Do',
       lista: 'To Do',
@@ -143,14 +142,14 @@ export default function ApiProvider({ children }: React.PropsWithChildren) {
     })
   }
 
-  const login = async (loginRequest: ILoginRequest) => {
+  const login = async (loginRequest: LoginRequestProps) => {
     const { data } = await api.post('/login', loginRequest)
     if (data.exception) return
     return data
   }
 
-  const findAll = async (): Promise<IFindAllResponse[]> => {
-    const { data } = await api.get<IItemTodoResponse[]>('/cards', {
+  const findAll = async (): Promise<FindAllResponseProps[]> => {
+    const { data } = await api.get<ItemTodoResponseProps[]>('/cards', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -164,9 +163,9 @@ export default function ApiProvider({ children }: React.PropsWithChildren) {
   }
 
   const createTodo = async (
-    item: IItemTodoRequest,
-  ): Promise<IItemTodoResponse> => {
-    const { data } = await api.post<IItemTodoResponse>('/cards', item, {
+    item: ItemTodoRequestProps,
+  ): Promise<ItemTodoResponseProps> => {
+    const { data } = await api.post<ItemTodoResponseProps>('/cards', item, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -187,12 +186,12 @@ export default function ApiProvider({ children }: React.PropsWithChildren) {
   }
 
   const updateTodo = async (
-    updatedTodo: IItemTodoResponse,
+    updatedTodo: ItemTodoResponseProps,
     destination: string,
   ) => {
     if (!selectedItem) return
     const newData = { ...updatedTodo, lista: destination }
-    const { data } = await api.put<IItemTodoResponse>(
+    const { data } = await api.put<ItemTodoResponseProps>(
       `/cards/${newData.id}`,
       newData,
       {
@@ -217,7 +216,7 @@ export default function ApiProvider({ children }: React.PropsWithChildren) {
     })
   }
 
-  const deleteTodo = async (todoToDelete: IItemTodoResponse) => {
+  const deleteTodo = async (todoToDelete: ItemTodoResponseProps) => {
     try {
       await api.delete(`/cards/${todoToDelete.id}`, {
         headers: {

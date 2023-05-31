@@ -13,9 +13,9 @@ class VerifyTokenMiddleware
     {
         try {
             JWTAuth::parseToken()->authenticate();
+            return $next($request);
         } catch (\Exception $exc) {
             return response()->json(['error' => true, 'message' => $exc->getMessage()], 401);
         }
-        return $next($request);
     }
 }

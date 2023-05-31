@@ -1,7 +1,6 @@
 'use client'
 
 import React, { createContext, useContext, useState } from 'react'
-import { IItem } from '../page'
 
 interface ModalProps {
   isModalEditOpen: boolean

@@ -1,11 +1,19 @@
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-import { useApiContext } from '@/app/context/ApiContext'
+import { ItemTodoResponseProps, useApiContext } from '@/app/context/ApiContext'
+import { IItem } from '@/app/dashboard/page'
 import { ImFilesEmpty } from 'react-icons/im'
-import { IColumn, IItem } from '@/app/page'
 import { useState } from 'react'
 
+type ListType = 'To Do' | 'Doing' | 'Done'
+
+export interface ColumnProps {
+  idType: string
+  lista: ListType
+  items: ItemTodoResponseProps[]
+}
+
 interface ColumnComponentProps {
-  column: IColumn
+  column: ColumnProps
   openModal: (item: IItem) => void
 }
 

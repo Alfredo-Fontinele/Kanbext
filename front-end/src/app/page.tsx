@@ -1,56 +1,94 @@
 'use client'
 
-import { IItemTodoResponse, useApiContext } from './context/ApiContext'
-import { useModalContext } from './context/ModalContext'
-import DraggableList from '@/components/DraggableList'
-import { IoMdAdd } from 'react-icons/io'
-import { useEffect } from 'react'
-
-type ListaProps = 'To Do' | 'Doing' | 'Done'
-
-export interface IItem {
-  id: string
-  conteudo: string
-  titulo: string
-}
-
-export interface IColumn {
-  idType: string
-  lista: ListaProps
-  items: IItemTodoResponse[]
-}
+import { FormEvent, useRef } from 'react'
+import { useApiContext } from './context/ApiContext'
+import { useRouter } from 'next/navigation'
+import Cookies from 'universal-cookie'
+import { toast } from 'react-toastify'
+import Toaster from '@/components/Toaster'
 
 export default function Home() {
-  const { openModalAdd } = useModalContext()
-  const { findAll } = useApiContext()
+  const inputLogin = useRef<HTMLInputElement | null>(null)
+  const inputPassword = useRef<HTMLInputElement | null>(null)
 
-  useEffect(() => {
-    async function getAllTodos() {
-      await findAll()
+  const { login } = useApiContext()
+  const router = useRouter()
+
+  const handleSubmitLoginForm = async (e: FormEvent) => {
+    e.preventDefault()
+    const passwordValue = inputPassword.current?.value
+    const loginValue = inputLogin.current?.value
+    const cookies = new Cookies()
+
+    if (!loginValue || !passwordValue) return
+
+    const loginRequest = {
+      login: loginValue,
+      senha: passwordValue,
     }
-    getAllTodos()
-  }, [])
+
+    const token = await login(loginRequest)
+    if (token && token.access_token) {
+      cookies.remove('token:clickideia', { path: '/' })
+      cookies.set('token:clickideia', token.access_token, { path: '/' })
+      router.push('/dashboard')
+      return
+    }
+    toast.error('Login ou senha incorretos')
+  }
 
   return (
-    <div className="flex flex-col w-full min-h-screen gap-10 p-6 bg-dark_theme ">
-      <div className="w-full flex justify-between items-center">
-        <h1 className="text-center text-4xl text-slate-700">Next Todo</h1>
-        <div className="hidden sm:flex">
-          <button
-            className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
-            onClick={openModalAdd}
-          >
-            Add Task
-          </button>
-        </div>
-        <IoMdAdd
-          className="flex sm:hidden text-white text-5xl p-2 border-solid border-2 border-slate-500 cursor-pointer"
-          onClick={openModalAdd}
-        />
+    <>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+        <h1 className="text-3xl font-bold mb-8">Login</h1>
+
+        <form
+          className="w-full flex flex-col gap-4 max-w-sm"
+          onSubmit={handleSubmitLoginForm}
+        >
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="login"
+            >
+              Login
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="login"
+              type="text"
+              placeholder="Digite seu login"
+              ref={inputLogin}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="password"
+            >
+              Senha
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="password"
+              type="password"
+              placeholder="Digite sua senha"
+              ref={inputPassword}
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              Entrar
+            </button>
+          </div>
+        </form>
       </div>
-      <div className="flex justify-evenly">
-        <DraggableList />
-      </div>
-    </div>
+      <Toaster />
+    </>
   )
 }

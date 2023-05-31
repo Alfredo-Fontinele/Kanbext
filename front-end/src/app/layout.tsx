@@ -1,5 +1,4 @@
 import ModalProvider from './context/ModalContext'
-import TodoProvider from './context/TodoContext'
 import ApiProvider from './context/ApiContext'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -20,9 +19,7 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className={inter.className}>
         <ApiProvider>
-          <TodoProvider>
-            <ModalProvider>{children}</ModalProvider>
-          </TodoProvider>
+          <ModalProvider>{children}</ModalProvider>
         </ApiProvider>
       </body>
     </html>
