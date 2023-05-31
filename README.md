@@ -1,6 +1,6 @@
 # Kanbext 📋🎯
 
-Bem-vindo a esta Aplicação Full Stack cujo objetivo era ser semelhante ao Jira implementado o método Kanban. Segue uma lista com as tecnologias utilizadas
+Bem-vindo ao Kanbext, uma Aplicação Full Stack cujo objetivo é ser semelhante ao Jira implementado o método Kanban. Segue uma lista com as tecnologias utilizadas
 
 -   ⚛️ React
 -   🔲 Next.js
