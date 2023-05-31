@@ -4,6 +4,7 @@ Bem-vindo ao Kanbext, uma Aplicação Full Stack cujo objetivo é ser semelhante
 
 -   ⚛️ React
 -   🔲 Next.js
+-   🔵 TypeScript
 -   💠 Tailwind
 -   🗄️ MySQL
 -   🔶 Laravel
